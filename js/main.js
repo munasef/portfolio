@@ -278,18 +278,6 @@ function initParallax() {
 
 
 /* ═══════════════════════════════════════
-   EMAIL (obfuscated — assembled at runtime)
-═══════════════════════════════════════ */
-function initEmail() {
-  const el = document.getElementById('contactEmail');
-  if (!el) return;
-  const addr = 'jarosch' + '@' + 'gmx.eu';
-  el.href = 'mailto:' + addr;
-  el.textContent = addr;
-}
-
-
-/* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
 renderProjects();
@@ -298,4 +286,3 @@ initVeil();
 initModal();
 initNav();
 initParallax();
-initEmail();
