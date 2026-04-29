@@ -771,12 +771,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
    STUDIOS STRIP
 ═══════════════════════════════════════════════ */
 .studios-strip {
-  margin-top: 56px;
-  padding-top: 36px;
+  margin-top: 28px;
+  padding-top: 24px;
   border-top: 1px solid var(--divider);
   display: flex;
   align-items: center;
-  gap: 40px;
+  gap: 32px;
   flex-wrap: wrap;
 }
 
