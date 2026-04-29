@@ -62,7 +62,7 @@ const PROJECTS = [
     tools:       "Houdini · Unreal Engine 5 · Niagara",
     featured:    true,
     tags:        ["Games", "Destruction"],
-    description: "Led real-time VFX on cinematics for the latest Tomb Raider entry at Eidos-Montréal. Owned the full effects pipeline — from Houdini simulation and asset creation through Niagara authoring and final in-engine delivery in Unreal Engine 5. The work demanded high-fidelity destruction and environmental FX that had to read clearly at cinematic quality while remaining performant inside the engine.",
+    description: "Led VFX on cinematics for the latest Tomb Raider entry at Eidos-Montréal. Owned the full effects pipeline — from Houdini simulation and asset creation through Niagara authoring and final in-engine delivery in Unreal Engine 5. The work demanded high-fidelity volume work and environmental FX that had to read clearly at cinematic quality while remaining performant inside the engine.",
     vimeo:       "",
     youtube:     "jZj4vWjzGas",
     poster:      "assets/posters/tomb-raider-atlantis.jpg",
@@ -77,8 +77,7 @@ const PROJECTS = [
     tools:       "Houdini · Unreal Engine 5 · Niagara",
     featured:    true,
     tags:        ["Games"],
-    description: "Leading real-time VFX for the open-world fantasy reboot at Eidos-Montréal for Xbox. Responsible for establishing and owning the full FX pipeline end-to-end — defining workflows between Houdini simulation, Niagara authoring, and Unreal Engine 5 delivery. The core challenge is achieving offline-quality organic and magical effects inside a real-time budget, across a large open world with varied biomes and scripted set pieces.",
-    vimeo:       "",
+    description: "Leading vfx VFX for the open-world fantasy reboot at Eidos-Montréal for Xbox. Defining workflows between Houdini simulations and ForzaTech
     youtube:     "w6TJTHdgmts",
     poster:      "assets/posters/fable.jpg",
   },
