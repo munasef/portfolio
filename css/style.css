@@ -131,6 +131,13 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .nav-link:hover { color: var(--text); }
 
+.nav-cv {
+  color: var(--faint);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+}
+.nav-cv:hover { color: var(--muted); }
+
 .nav-socials {
   display: flex;
   align-items: center;
@@ -836,6 +843,22 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+.footer-cv {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-top: 14px;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--faint);
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 1px;
+  transition: color var(--transition), border-color var(--transition);
+}
+.footer-cv:hover { color: var(--muted); border-color: var(--muted); }
 
 .footer-email {
   font-size: clamp(15px, 2vw, 20px);
