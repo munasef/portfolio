@@ -14,7 +14,7 @@
  */
 
 const PHOTOS = [
-  { src: "assets/photography/photo-turquoise-lake.jpg",    caption: "Lake Louise, Banff" },
+  { src: "assets/photography/photo-turquoise-lake.jpg",    caption: "My dog for some reason" },
   { src: "assets/photography/photo-cave-light.jpg",        caption: "Point Reyes, California" },
   { src: "assets/photography/photo-foggy-mountain.jpg",    caption: "Yosemite Valley" },
   { src: "assets/photography/photo-lighthouse.jpg",        caption: "" },
