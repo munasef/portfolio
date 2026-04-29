@@ -8,7 +8,8 @@
   <link rel="canonical" href="https://jaroschfx.com" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <link href="https://api.fontshare.com/v2/css?f[]=zodiak@400,700&f[]=satoshi@400,500,700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
@@ -49,35 +50,37 @@
        HERO
   ═══════════════════════════ -->
   <section class="hero" id="hero">
-    <div class="hero-banner" id="heroBanner">
-      <div class="hero-banner-collage" id="bannerCollage">
-        <img src="assets/posters/dune-part-one.jpg"                      alt="" aria-hidden="true" />
-        <img src="assets/posters/avatar-the-way-of-water.jpg"            alt="" aria-hidden="true" />
-        <img src="assets/posters/kingdom-of-the-planet-of-the-apes.jpg"  alt="" aria-hidden="true" />
-        <img src="assets/posters/tomb-raider-atlantis.jpg"                alt="" aria-hidden="true" />
-        <img src="assets/posters/fable.jpg"                               alt="" aria-hidden="true" />
-        <img src="assets/posters/the-last-of-us.jpg"                      alt="" aria-hidden="true" />
-        <img src="assets/posters/monarch-legacy-of-monsters.jpg"          alt="" aria-hidden="true" />
-        <img src="assets/posters/transformers-rise-of-the-beasts.jpg"     alt="" aria-hidden="true" />
+
+    <!-- Vimeo background — silent, autoplay, loop, no controls -->
+    <div class="hero-media">
+      <div class="hero-iframe-wrap">
+        <iframe
+          src="https://player.vimeo.com/video/902276602?background=1&muted=1&autoplay=1&loop=1&byline=0&title=0"
+          id="heroVimeo"
+          allow="autoplay; fullscreen"
+          allowfullscreen
+          aria-hidden="true"
+          tabindex="-1"
+          title=""
+        ></iframe>
       </div>
     </div>
+
     <div class="hero-content">
       <p class="hero-eyebrow">Lead FX Technical Director &nbsp;·&nbsp; Lead VFX Artist</p>
       <h1 class="hero-name">Alexander<br>Jarosch</h1>
       <p class="hero-tagline">Film background. Game cinematics. Real-time VFX.</p>
       <div class="hero-actions">
-        <a href="#projects" class="btn-primary">View Work</a>
         <button class="btn-showreel" id="showreelBtn">
-          <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
           Watch Showreel
         </button>
+        <a href="#projects" class="btn-ghost">View Work</a>
         <a href="#contact"  class="btn-ghost">Get In Touch</a>
       </div>
     </div>
-    <div class="hero-scroll">
-      <span class="hero-scroll-label">Scroll</span>
-      <div class="hero-scroll-line"></div>
-    </div>
+
+    <div class="scroll-hint" aria-hidden="true">Scroll</div>
   </section>
 
 
@@ -240,5 +243,20 @@
   <script src="js/projects.js"></script>
   <script src="js/photos.js"></script>
   <script src="js/main.js"></script>
+  <!-- Vimeo Player API — skip to best part of reel on load -->
+  <script src="https://player.vimeo.com/api/player.js"></script>
+  <script>
+    (function () {
+      var iframe = document.getElementById('heroVimeo');
+      if (!iframe) return;
+      var player = new Vimeo.Player(iframe);
+      player.on('loaded', function () { player.setCurrentTime(9).catch(function(){}); });
+      player.on('timeupdate', function (data) {
+        player.getDuration().then(function (dur) {
+          if (data.seconds >= dur - 0.5) player.setCurrentTime(8).catch(function(){});
+        });
+      });
+    })();
+  </script>
 </body>
 </html>

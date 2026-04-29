@@ -263,21 +263,6 @@ function initNav() {
 
 
 /* ═══════════════════════════════════════
-   PARALLAX BANNER
-═══════════════════════════════════════ */
-function initParallax() {
-  const collage = document.getElementById('bannerCollage');
-  if (!collage) return;
-  const hero = document.getElementById('hero');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < hero.offsetHeight) {
-      collage.style.transform = `translateY(${window.scrollY * 0.3}px)`;
-    }
-  }, { passive: true });
-}
-
-
-/* ═══════════════════════════════════════
    PHOTOGRAPHY
 ═══════════════════════════════════════ */
 function renderPhotos() {
@@ -371,6 +356,5 @@ initFilters();
 initVeil();
 initModal();
 initNav();
-initParallax();
 renderPhotos();
 initPhotoLightbox();
