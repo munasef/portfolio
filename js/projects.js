@@ -172,7 +172,7 @@ const PROJECTS = [
     tags:        ["Film", "Fluids", "Creature"],
     description: "FX TD at Weta FX on James Cameron's record-breaking sequel. Contributed to the film's defining water and ocean simulations — one of the most technically ambitious fluid FX undertakings in the history of visual effects.",
     vimeo:       "",
-    youtube:     "LOP80Klw-_Q",
+    youtube:     "d9MyW72ELq0",
     poster:      "assets/posters/avatar-the-way-of-water.jpg",
   },
 
