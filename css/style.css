@@ -279,7 +279,14 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 
 .hero-actions {
   display: flex;
-  gap: 12px;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.hero-actions-secondary {
+  display: flex;
+  gap: 8px;
   flex-wrap: wrap;
   align-items: center;
 }
@@ -328,26 +335,34 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 .btn-showreel {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 48px;
-  padding: 12px 24px;
-  border: 1px solid var(--accent-line);
-  color: var(--accent);
+  gap: 10px;
+  min-height: 54px;
+  padding: 14px 34px;
+  background: var(--accent);
+  color: #fff;
   font-family: var(--font-body);
-  font-size: 13px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   border-radius: 999px;
-  background: var(--accent-soft);
-  transition: background var(--transition), border-color var(--transition), transform var(--transition);
+  border: 1px solid transparent;
+  box-shadow: 0 0 32px rgba(216,106,46,.35);
+  transition: background var(--transition), box-shadow var(--transition), transform var(--transition);
   cursor: pointer;
 }
 .btn-showreel:hover {
-  background: rgba(216,106,46,.2);
-  border-color: var(--accent);
-  transform: translateY(-1px);
+  background: var(--accent-hover);
+  box-shadow: 0 0 48px rgba(216,106,46,.55);
+  transform: translateY(-2px);
 }
+
+.btn-sm {
+  min-height: 38px;
+  padding: 8px 18px;
+  font-size: 11px;
+}
+
 
 /* YouTube thumbnail — links out to YouTube (avoids Error 153 embedding restrictions) */
 .yt-preview {
