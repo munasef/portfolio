@@ -131,12 +131,6 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .nav-link:hover { color: var(--text); }
 
-.nav-cv {
-  color: var(--faint);
-  font-size: 11px;
-  letter-spacing: 0.1em;
-}
-.nav-cv:hover { color: var(--muted); }
 
 .nav-socials {
   display: flex;
