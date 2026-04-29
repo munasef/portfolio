@@ -349,6 +349,36 @@ function initPhotoLightbox() {
 
 
 /* ═══════════════════════════════════════
+   PHOTO VEIL (expand / collapse)
+═══════════════════════════════════════ */
+function initPhotoVeil() {
+  const wrapper = document.getElementById('photoWrapper');
+  if (!wrapper) return;
+
+  document.getElementById('showAllPhotosBtn').addEventListener('click', () => {
+    wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+    wrapper.classList.remove('collapsed');
+    wrapper.classList.add('expanded');
+    wrapper.addEventListener('transitionend', () => {
+      if (wrapper.classList.contains('expanded')) wrapper.style.maxHeight = 'none';
+    }, { once: true });
+  });
+
+  document.getElementById('collapsePhotosBtn').addEventListener('click', () => {
+    wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        wrapper.style.maxHeight = '480px';
+        wrapper.classList.remove('expanded');
+        wrapper.classList.add('collapsed');
+      });
+    });
+    document.getElementById('photography').scrollIntoView({ behavior: 'smooth' });
+  });
+}
+
+
+/* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
 renderProjects();
@@ -357,4 +387,5 @@ initVeil();
 initModal();
 initNav();
 renderPhotos();
+initPhotoVeil();
 initPhotoLightbox();

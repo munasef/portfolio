@@ -26,10 +26,10 @@
 
     <div class="nav-menu" id="navMenu">
       <div class="nav-links">
-        <a href="#projects"     class="nav-link">Projects</a>
-        <a href="#about"        class="nav-link">About</a>
-        <a href="#photography"  class="nav-link">Photography</a>
-        <a href="#contact"      class="nav-link">Contact</a>
+        <a href="#projects"  class="nav-link">Projects</a>
+        <a href="#about"     class="nav-link">About</a>
+        <a href="#photography" class="nav-link">Photography</a>
+        <a href="#contact"   class="nav-link">Contact</a>
       </div>
       <div class="nav-socials">
         <a href="https://github.com/munasef"   target="_blank" rel="noopener" aria-label="GitHub"   class="social-icon">
@@ -127,12 +127,9 @@
         <!-- Drop your photo into assets/ and update the filename below -->
         <img
           src="assets/photo.jpg"
-          alt="Your Name"
-          onerror="this.style.display='none'; document.getElementById('photoFallback').style.display='flex';"
+          alt="Alexander Jarosch, Lead FX Technical Director"
+          onerror="this.style.display='none';"
         />
-        <div class="photo-placeholder" id="photoFallback" style="display:none">
-          <span>Add assets/photo.jpg</span>
-        </div>
       </div>
 
       <div class="about-content">
@@ -163,18 +160,6 @@
       </div>
 
     </div>
-  </section>
-
-
-  <!-- ═══════════════════════════
-       PHOTOGRAPHY
-  ═══════════════════════════ -->
-  <section class="photography" id="photography" oncontextmenu="return false">
-    <div class="section-header">
-      <p class="section-label">Through the Lens</p>
-      <h2 class="section-title">Photography</h2>
-    </div>
-    <div class="photo-grid" id="photoGrid"></div>
   </section>
 
 
@@ -221,8 +206,28 @@
   </div>
 
   <!-- ═══════════════════════════
-       PHOTO LIGHTBOX
-       (populated by main.js — do not edit)
+       PHOTOGRAPHY
+  ═══════════════════════════ -->
+  <section class="photography" id="photography">
+    <div class="section-header">
+      <p class="section-label">Through the Lens</p>
+      <h2 class="section-title">Photography</h2>
+    </div>
+
+    <div class="photo-wrapper collapsed" id="photoWrapper">
+      <div class="photo-grid" id="photoGrid"></div>
+      <div class="photo-veil" id="photoVeil">
+        <button class="veil-btn" id="showAllPhotosBtn">
+          <span>View all photos</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+      </div>
+      <button class="collapse-btn" id="collapsePhotosBtn">Show less ↑</button>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════
+       PHOTO LIGHTBOX (standalone)
   ═══════════════════════════ -->
   <div class="photo-lightbox" id="photoLightbox">
     <button class="photo-lightbox-close" id="photoLightboxClose" aria-label="Close photo">
