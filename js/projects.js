@@ -168,6 +168,7 @@ const PROJECTS = [
     studio:      "Weta FX",
     tools:       "Houdini · Nuke · Maya",
     featured:    true,
+    award:       "Academy Award — Best Visual Effects",
     tags:        ["Film", "Fluids"],
     description: "FX TD at Weta FX on James Cameron's record-breaking sequel, which spent three years in production and earned over $2.3 billion at the box office. Contributed to the film's defining water and ocean simulations — the primary technical ambition of the project. Simulation work required bespoke Houdini setups to achieve the volume, scale, and subsurface behaviour of water at full CG fidelity, integrated with photoreal digital characters performing entirely underwater.",
     vimeo:       "",
