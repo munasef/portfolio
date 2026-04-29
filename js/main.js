@@ -197,6 +197,7 @@ function openModal(index) {
       <span class="modal-tag modal-tag-type">${p.type}</span>
       ${p.year ? `<span class="modal-tag modal-tag-year">${p.year}</span>` : ''}
     </div>
+    ${p.award ? `<p class="modal-award"><span class="modal-award-star">★</span>${p.award}</p>` : ''}
     <h2 class="modal-title" id="modalTitle">${p.title}</h2>
     <p class="modal-role">${[p.role, p.studio].filter(Boolean).join(' &nbsp;·&nbsp; ')}</p>
     ${p.description ? `<p class="modal-description">${p.description}</p>`                        : ''}

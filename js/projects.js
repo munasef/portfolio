@@ -227,6 +227,7 @@ const PROJECTS = [
     studio:      "DNEG",
     tools:       "Houdini · Nuke",
     featured:    true,
+    award:       "Academy Award — Best Visual Effects",
     tags:        ["Film", "Sci-Fi", "Destruction"],
     description: "Lead FX TD at DNEG on Denis Villeneuve's Oscar-winning adaptation, contributing to nearly 1,200 VFX shots across the production. The defining technical challenge was sand — building simulation systems in Houdini that could produce sand at planetary scale while retaining the fine grain detail Villeneuve's photography demanded. Dust, atmosphere, and spice-cloud work were developed in close collaboration with the director and VFX Supervisor to serve the film's austere, tactile aesthetic. The film won the Academy Award for Best Visual Effects.",
     vimeo:       "",
