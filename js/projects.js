@@ -434,18 +434,7 @@ const PROJECTS = [
     poster:      "assets/posters/doctor-strange.jpg",
   },
 
-  {
-    title:       "Aftermath",
-    type:        "Short · VFX",
-    year:        "2016",
-    role:        "Visual Effects Supervisor",
-    studio:      "",
-    tools:       "Houdini · Nuke",
-    tags:        ["Film", "Destruction"],
-    description: "Sole VFX Supervisor on the short film (IMDB 9.0). Full creative and technical responsibility for all visual effects from brief through final delivery.",
-    vimeo:       "",
-    poster:      "assets/posters/aftermath.jpg",
-  },
+
 
   {
     title:       "Captain America: Civil War",
