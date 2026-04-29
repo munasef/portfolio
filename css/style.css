@@ -482,8 +482,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* ── Grids ── */
 .projects-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
 }
 
 .featured-grid {
@@ -1193,7 +1193,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 /* tablet */
 @media (max-width: 960px) {
   .featured-grid          { grid-template-columns: repeat(2, 1fr); }
-  .projects-grid          { grid-template-columns: repeat(2, 1fr); }
+  .projects-grid          { grid-template-columns: repeat(4, 1fr); }
   .photo-grid             { columns: 3; }
 
   .about-inner {
