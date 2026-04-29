@@ -77,7 +77,7 @@ const PROJECTS = [
     tools:       "Houdini · Unreal Engine 5 · Niagara",
     featured:    true,
     tags:        ["Games"],
-    description: "Leading vfx VFX for the open-world fantasy reboot at Eidos-Montréal for Xbox. Defining workflows between Houdini simulations and ForzaTech
+    description: "Leading real-time VFX for the open-world fantasy reboot at Eidos-Montréal for Xbox. Responsible for establishing and owning the full FX pipeline end-to-end — defining workflows between Houdini simulation, Niagara authoring, and Unreal Engine 5 delivery. The core challenge is achieving offline-quality organic and magical effects inside a real-time budget, across a large open world with varied biomes and scripted set pieces.",
     youtube:     "w6TJTHdgmts",
     poster:      "assets/posters/fable.jpg",
   },
