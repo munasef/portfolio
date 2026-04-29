@@ -225,8 +225,9 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
       rgba(15,17,21,.82) 78%,
       rgba(15,17,21,1.0) 100%),
     linear-gradient(to right,
-      rgba(15,17,21,.38) 0%,
-      transparent 55%);
+      rgba(6,8,18,.55) 0%,
+      rgba(6,8,18,.18) 40%,
+      transparent 65%);
 }
 
 /* content */
@@ -245,16 +246,17 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-weight: 700;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--accent);
+  color: var(--accent-hover);
   margin-bottom: 18px;
+  text-shadow: 0 0 20px rgba(216,106,46,.4);
 }
 .hero-eyebrow::before {
   content: '';
   display: block;
   width: 32px;
   height: 1px;
-  background: var(--accent);
-  opacity: .7;
+  background: var(--accent-hover);
+  opacity: .9;
   flex-shrink: 0;
 }
 
@@ -262,7 +264,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   font-family: var(--font-display);
   font-size: clamp(56px, 11vw, 130px);
   font-weight: 700;
-  line-height: 0.92;
+  line-height: 0.88;
   letter-spacing: -0.04em;
   color: var(--text);
   margin-bottom: 24px;
@@ -315,7 +317,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   align-items: center;
   min-height: 48px;
   padding: 12px 26px;
-  border: 1px solid rgba(237,241,245,.18);
+  border: 1px solid rgba(237,241,245,.10);
   background: rgba(237,241,245,.06);
   color: var(--muted);
   font-size: 13px;
@@ -358,8 +360,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 
 .btn-sm {
-  min-height: 38px;
-  padding: 8px 18px;
+  min-height: 36px;
+  padding: 7px 16px;
   font-size: 11px;
 }
 
