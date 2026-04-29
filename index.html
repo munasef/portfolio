@@ -25,9 +25,10 @@
 
     <div class="nav-menu" id="navMenu">
       <div class="nav-links">
-        <a href="#projects" class="nav-link">Projects</a>
-        <a href="#about"    class="nav-link">About</a>
-        <a href="#contact"  class="nav-link">Contact</a>
+        <a href="#projects"     class="nav-link">Projects</a>
+        <a href="#about"        class="nav-link">About</a>
+        <a href="#photography"  class="nav-link">Photography</a>
+        <a href="#contact"      class="nav-link">Contact</a>
       </div>
       <div class="nav-socials">
         <a href="https://github.com/munasef"   target="_blank" rel="noopener" aria-label="GitHub"   class="social-icon">
@@ -163,6 +164,18 @@
 
 
   <!-- ═══════════════════════════
+       PHOTOGRAPHY
+  ═══════════════════════════ -->
+  <section class="photography" id="photography" oncontextmenu="return false">
+    <div class="section-header">
+      <p class="section-label">Through the Lens</p>
+      <h2 class="section-title">Photography</h2>
+    </div>
+    <div class="photo-grid" id="photoGrid"></div>
+  </section>
+
+
+  <!-- ═══════════════════════════
        CONTACT / FOOTER
   ═══════════════════════════ -->
   <footer class="footer" id="contact">
@@ -204,7 +217,28 @@
     </div>
   </div>
 
+  <!-- ═══════════════════════════
+       PHOTO LIGHTBOX
+       (populated by main.js — do not edit)
+  ═══════════════════════════ -->
+  <div class="photo-lightbox" id="photoLightbox">
+    <button class="photo-lightbox-close" id="photoLightboxClose" aria-label="Close photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+    <button class="photo-lightbox-nav prev" id="photoLightboxPrev" aria-label="Previous photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+    </button>
+    <button class="photo-lightbox-nav next" id="photoLightboxNext" aria-label="Next photo">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+    </button>
+    <div class="photo-lightbox-inner">
+      <img class="photo-lightbox-img" id="photoLightboxImg" src="" alt="" draggable="false" />
+      <p class="photo-lightbox-caption" id="photoLightboxCaption"></p>
+    </div>
+  </div>
+
   <script src="js/projects.js"></script>
+  <script src="js/photos.js"></script>
   <script src="js/main.js"></script>
 </body>
 </html>

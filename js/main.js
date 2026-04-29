@@ -278,6 +278,92 @@ function initParallax() {
 
 
 /* ═══════════════════════════════════════
+   PHOTOGRAPHY
+═══════════════════════════════════════ */
+function renderPhotos() {
+  const grid    = document.getElementById('photoGrid');
+  const section = document.getElementById('photography');
+  if (!grid || typeof PHOTOS === 'undefined' || PHOTOS.length === 0) {
+    if (section) section.style.display = 'none';
+    return;
+  }
+
+  PHOTOS.forEach((photo, i) => {
+    const item = document.createElement('div');
+    item.className = 'photo-item';
+
+    const img = document.createElement('img');
+    img.className    = 'photo-item-thumb';
+    img.src          = photo.src;
+    img.alt          = photo.caption || '';
+    img.loading      = 'lazy';
+    img.draggable    = false;
+    img.onerror      = () => { item.style.display = 'none'; };
+    item.appendChild(img);
+
+    if (photo.caption) {
+      const cap = document.createElement('span');
+      cap.className   = 'photo-caption';
+      cap.textContent = photo.caption;
+      item.appendChild(cap);
+    }
+
+    item.addEventListener('click', () => openPhotoLightbox(i));
+    grid.appendChild(item);
+  });
+}
+
+let _lbIndex = 0;
+
+function openPhotoLightbox(index) {
+  _lbIndex = index;
+  _updateLightboxPhoto(index);
+  document.getElementById('photoLightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function _updateLightboxPhoto(index) {
+  _lbIndex = index;
+  const p   = PHOTOS[index];
+  const img = document.getElementById('photoLightboxImg');
+  const cap = document.getElementById('photoLightboxCaption');
+  img.src = p.src;
+  img.alt = p.caption || '';
+  cap.textContent  = p.caption || '';
+  cap.style.display = p.caption ? '' : 'none';
+}
+
+function closePhotoLightbox() {
+  document.getElementById('photoLightbox').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function initPhotoLightbox() {
+  const lb = document.getElementById('photoLightbox');
+  if (!lb) return;
+
+  document.getElementById('photoLightboxClose').addEventListener('click', closePhotoLightbox);
+
+  document.getElementById('photoLightboxPrev').addEventListener('click', () => {
+    _updateLightboxPhoto((_lbIndex - 1 + PHOTOS.length) % PHOTOS.length);
+  });
+
+  document.getElementById('photoLightboxNext').addEventListener('click', () => {
+    _updateLightboxPhoto((_lbIndex + 1) % PHOTOS.length);
+  });
+
+  lb.addEventListener('click', e => { if (e.target === lb) closePhotoLightbox(); });
+
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape')     closePhotoLightbox();
+    if (e.key === 'ArrowLeft')  _updateLightboxPhoto((_lbIndex - 1 + PHOTOS.length) % PHOTOS.length);
+    if (e.key === 'ArrowRight') _updateLightboxPhoto((_lbIndex + 1) % PHOTOS.length);
+  });
+}
+
+
+/* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
 renderProjects();
@@ -286,3 +372,5 @@ initVeil();
 initModal();
 initNav();
 initParallax();
+renderPhotos();
+initPhotoLightbox();
