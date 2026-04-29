@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#13131f"/>
+      <stop offset="50%"  stop-color="#1a1a2e"/>
+      <stop offset="100%" stop-color="#130d1f"/>
+    </linearGradient>
+  </defs>
+  <rect width="1280" height="720" fill="url(#g)"/>
+  <text x="640" y="370" font-family="monospace" font-size="18" fill="#2e2e4a"
+        text-anchor="middle" letter-spacing="6" text-transform="uppercase">POSTER IMAGE</text>
+</svg>
