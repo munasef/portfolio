@@ -14,6 +14,8 @@
  */
 
 const PHOTOS = [
+  { src: "assets/photography/oscar-joe-letteri.jpg",       caption: "" },
+  { src: "assets/photography/oscar-bar.jpg",               caption: "" },
   { src: "assets/photography/photo-turquoise-lake.jpg",    caption: "My dog for some reason" },
   { src: "assets/photography/photo-cave-light.jpg",        caption: "Point Reyes, California" },
   { src: "assets/photography/photo-foggy-mountain.jpg",    caption: "Yosemite Valley" },
