@@ -845,6 +845,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   background-clip: text;
 }
 
+.footer-sub {
+  font-size: 15px;
+  color: var(--faint);
+  margin-bottom: 24px;
+}
+
 .footer-cv {
   display: inline-flex;
   align-items: center;
