@@ -380,6 +380,42 @@ function initPhotoVeil() {
 
 
 /* ═══════════════════════════════════════
+   CONTACT FORM
+═══════════════════════════════════════ */
+function initContactForm() {
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  if (!form) return;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.textContent = 'Sending...';
+    status.className = 'form-status';
+
+    try {
+      const res = await fetch(form.action, {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { 'Accept': 'application/json' },
+      });
+
+      if (res.ok) {
+        form.reset();
+        status.textContent = 'Thanks — message sent!';
+        status.className = 'form-status success';
+      } else {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.className = 'form-status error';
+      }
+    } catch {
+      status.textContent = 'Something went wrong. Please try again.';
+      status.className = 'form-status error';
+    }
+  });
+}
+
+
+/* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
 renderProjects();
@@ -390,3 +426,4 @@ initNav();
 renderPhotos();
 initPhotoVeil();
 initPhotoLightbox();
+initContactForm();
