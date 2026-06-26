@@ -849,6 +849,82 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   color: var(--text);
 }
 
+/* ── Career Timeline ── */
+.about-timeline {
+  margin-top: 40px;
+}
+.timeline-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--divider);
+  padding-bottom: 8px;
+}
+.timeline-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.timeline-item {
+  display: grid;
+  grid-template-columns: 100px 24px 1fr;
+  align-items: start;
+}
+.timeline-date {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--faint);
+  padding-top: 2px;
+}
+.timeline-dot-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+.timeline-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: var(--accent);
+  margin-top: 6px;
+  border: 1px solid var(--accent);
+}
+.timeline-line {
+  flex-grow: 1;
+  width: 1px;
+  background-color: var(--divider);
+  margin-top: 6px;
+  margin-bottom: 6px;
+  min-height: 30px;
+}
+.timeline-content {
+  padding-bottom: 24px;
+}
+.timeline-item:last-child .timeline-content {
+  padding-bottom: 0;
+}
+.timeline-item:last-child .timeline-line {
+  display: none;
+}
+.timeline-title {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+.timeline-at {
+  color: var(--accent);
+  font-weight: normal;
+}
+.timeline-desc {
+  font-size: 12px;
+  color: var(--muted);
+  line-height: 1.5;
+}
 
 /* ═══════════════════════════════════════════════
    STUDIOS STRIP
