@@ -36,7 +36,7 @@ const FILTERS = [
   { label: 'Destruction', value: 'Destruction'  },
   { label: 'Fluids',      value: 'Fluids'       },
   { label: 'Pyro',        value: 'Pyro'         },
-
+  { label: 'Niagara',     value: 'Niagara'      },
 ];
 
 
@@ -61,7 +61,7 @@ const PROJECTS = [
     studio:      "Eidos-Montréal",
     tools:       "Houdini · Unreal Engine 5 · Niagara",
     featured:    true,
-    tags:        ["Games", "Destruction"],
+    tags:        ["Games", "Destruction","Fluids","Niagara","Pyro"],
     description: "Lead of the cinematics VFX team at Eidos-Montréal on the latest Tomb Raider entry. Created and integrated effects for cinematics in Unreal Engine 5, heavy on procedural Houdini and Niagara work. Supervised a team of three.",
     vimeo:       "",
     youtube:     "jZj4vWjzGas",
