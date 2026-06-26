@@ -1,0 +1,26 @@
+[
+  {
+    "slug": "vertex-color-shader-reveal",
+    "title": "Procedural Flow & Reveal Shaders: Baking Houdini Sims into Vertex Colors",
+    "date": "June 26, 2026",
+    "summary": "Explore how to procedurally grow blood flows in Houdini using Find Shortest Path and VDB processing, bake the simulation's time-of-arrival into vertex colors, and drive a smooth, customizable reveal shader at runtime in-engine.",
+    "readTime": "5 min read",
+    "tags": ["Houdini", "VEX", "Shaders", "Gamedev"]
+  },
+  {
+    "slug": "apex-rbd-export",
+    "title": "Abusing Houdini APEX: Bone-Driven RBD Exports for Games",
+    "date": "June 26, 2026",
+    "summary": "Traditional game engine exports for rigid bodies often rely on automated SideFX Labs tools. Learn how to leverage Houdini's APEX rigging system to bind bones to fragments for precise hierarchies, naming, and animation control.",
+    "readTime": "4 min read",
+    "tags": ["Houdini", "APEX", "RBD", "Gamedev"]
+  },
+  {
+    "slug": "hello-world",
+    "title": "Optimizing Pyro Simulations in Houdini: A VEX-Based Approach",
+    "date": "June 26, 2026",
+    "summary": "In high-end film pipelines, simulating large-scale pyrotechnics efficiently is a constant challenge. Learn how to use VEX to prune simulation grids and optimize performance by 30-40%.",
+    "readTime": "3 min read",
+    "tags": ["Houdini", "VEX", "VFX"]
+  }
+]
