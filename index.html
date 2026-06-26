@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css?v=1.0.1" />
 
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-MXQ8XE7NEF"></script>
@@ -104,8 +104,15 @@
       <h2 class="section-title">Projects</h2>
     </div>
 
-    <!-- Filter buttons — generated from FILTERS in projects.js -->
-    <div class="filter-bar" id="filterBar"></div>
+    <!-- Filter buttons and Search bar -->
+    <div class="projects-controls">
+      <div class="filter-bar" id="filterBar"></div>
+      <div class="search-box">
+        <svg class="search-icon" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <input type="text" id="projectSearch" placeholder="Search projects, tools, or studios..." aria-label="Search projects" autocomplete="off" />
+        <button id="clearSearchBtn" aria-label="Clear search" class="clear-search-btn" style="display:none;">&times;</button>
+      </div>
+    </div>
 
     <!-- Featured highlights (mark featured:true in projects.js) -->
     <p class="projects-sublabel" id="featuredLabel">Highlights</p>
@@ -272,7 +279,7 @@
 
   <script src="js/projects.js"></script>
   <script src="js/photos.js"></script>
-  <script src="js/main.js"></script>
+  <script src="js/main.js?v=1.0.1"></script>
   <!-- Vimeo Player API — skip to best part of reel on load -->
   <script src="https://player.vimeo.com/api/player.js"></script>
   <script>

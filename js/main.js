@@ -72,11 +72,129 @@ function renderProjects() {
 
 
 /* ═══════════════════════════════════════
-   FILTER BAR
+   FILTER BAR & SEARCH
 ═══════════════════════════════════════ */
+function applyFilters() {
+  const searchInput = document.getElementById('projectSearch');
+  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  
+  const activeBtn = document.querySelector('#filterBar .filter-btn.active');
+  const filter = activeBtn ? activeBtn.dataset.filter : 'all';
+  const isAll = filter === 'all';
+  
+  // Toggle clear button
+  const clearBtn = document.getElementById('clearSearchBtn');
+  if (clearBtn) {
+    clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
+  }
+  
+  let visibleFeaturedCount = 0;
+  let visibleAllCount = 0;
+  
+  document.querySelectorAll('.project-card').forEach(card => {
+    const idx = parseInt(card.dataset.index, 10);
+    const project = PROJECTS[idx];
+    if (!project) return;
+    
+    // Category match
+    const tags = project.tags || [];
+    const matchCategory = isAll || tags.includes(filter);
+    
+    // Search query match
+    let matchSearch = true;
+    if (query.length > 0) {
+      const title = (project.title || '').toLowerCase();
+      const role = (project.role || '').toLowerCase();
+      const studio = (project.studio || '').toLowerCase();
+      const tools = (project.tools || '').toLowerCase();
+      const description = (project.description || '').toLowerCase();
+      const year = (project.year || '').toLowerCase();
+      const projectTags = tags.map(t => t.toLowerCase());
+      
+      matchSearch = title.includes(query) ||
+                    role.includes(query) ||
+                    studio.includes(query) ||
+                    tools.includes(query) ||
+                    description.includes(query) ||
+                    year.includes(query) ||
+                    projectTags.some(t => t.includes(query));
+    }
+    
+    const show = matchCategory && matchSearch;
+    card.classList.toggle('hidden', !show);
+    
+    if (show) {
+      if (project.featured) {
+        visibleFeaturedCount++;
+      } else {
+        visibleAllCount++;
+      }
+    }
+  });
+  
+  // Hide empty sections
+  const featuredLabel = document.getElementById('featuredLabel');
+  const featuredGrid = document.getElementById('featuredGrid');
+  if (featuredLabel && featuredGrid) {
+    const showFeatured = visibleFeaturedCount > 0;
+    featuredLabel.style.display = showFeatured ? '' : 'none';
+    featuredGrid.style.display = showFeatured ? '' : 'none';
+  }
+  
+  const filmographyHeader = document.getElementById('filmographyHeader');
+  const allProjectsWrapper = document.getElementById('allProjectsWrapper');
+  if (filmographyHeader && allProjectsWrapper) {
+    const showAll = visibleAllCount > 0;
+    filmographyHeader.style.display = showAll ? '' : 'none';
+    allProjectsWrapper.style.display = showAll ? '' : 'none';
+  }
+  
+  // Auto-expand/collapse credits list based on filtering
+  if (!isAll || query.length > 0) {
+    expandFilmography();
+  } else {
+    collapseFilmography();
+  }
+}
+
+function initSkillTags() {
+  document.querySelectorAll('.skill-tag').forEach(tag => {
+    tag.addEventListener('click', () => {
+      const tagText = tag.textContent.trim();
+      const searchInput = document.getElementById('projectSearch');
+      const bar = document.getElementById('filterBar');
+      if (!bar) return;
+      
+      const matchedFilterBtn = Array.from(bar.querySelectorAll('.filter-btn')).find(
+        btn => btn.dataset.filter.toLowerCase() === tagText.toLowerCase()
+      );
+      
+      if (matchedFilterBtn) {
+        if (searchInput) searchInput.value = '';
+        matchedFilterBtn.click();
+      } else {
+        const allBtn = Array.from(bar.querySelectorAll('.filter-btn')).find(b => b.dataset.filter === 'all');
+        if (allBtn) {
+          bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+          allBtn.classList.add('active');
+        }
+        if (searchInput) {
+          searchInput.value = tagText;
+        }
+        applyFilters();
+      }
+      
+      const projectsSection = document.getElementById('projects');
+      if (projectsSection) {
+        projectsSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+}
+
 function initFilters() {
-  const bar     = document.getElementById('filterBar');
-  const wrapper = document.getElementById('allProjectsWrapper');
+  const bar = document.getElementById('filterBar');
+  if (!bar) return;
 
   FILTERS.forEach(f => {
     const btn = document.createElement('button');
@@ -93,23 +211,25 @@ function initFilters() {
     bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
     btn.classList.add('active');
 
-    const filter    = btn.dataset.filter;
-    const isAll     = filter === 'all';
-
-    // filter every card in both grids
-    document.querySelectorAll('.project-card').forEach(card => {
-      const tags  = card.dataset.tags ? card.dataset.tags.split(',') : [];
-      const match = isAll || tags.includes(filter);
-      card.classList.toggle('hidden', !match);
-    });
-
-    // when a specific filter is active, expand the filmography so all results are visible
-    if (!isAll) {
-      expandFilmography();
-    } else {
-      collapseFilmography();
-    }
+    applyFilters();
   });
+  
+  const searchInput = document.getElementById('projectSearch');
+  const clearBtn = document.getElementById('clearSearchBtn');
+  
+  if (searchInput) {
+    searchInput.addEventListener('input', applyFilters);
+  }
+  
+  if (clearBtn && searchInput) {
+    clearBtn.addEventListener('click', () => {
+      searchInput.value = '';
+      applyFilters();
+      searchInput.focus();
+    });
+  }
+  
+  initSkillTags();
 }
 
 
