@@ -1,3 +1,6 @@
+// Element to return focus to when a dialog closes
+let lastFocus = null;
+
 /* ═══════════════════════════════════════
    HERO REEL — skip it for reduced motion
 ═══════════════════════════════════════ */
@@ -149,11 +152,14 @@ function openModal(index) {
 
   overlay.setAttribute('aria-hidden', 'false');
   overlay.classList.add('open');
+  lastFocus = document.activeElement;
+  document.getElementById('modalClose').focus();
   document.body.style.overflow = 'hidden';
 }
 
 function closeModal() {
   overlay.classList.remove('open');
+  if (lastFocus) lastFocus.focus();
   overlay.setAttribute('aria-hidden', 'true');
   document.body.style.overflow = '';
   setTimeout(() => { modalMedia.innerHTML = ''; modalBody.innerHTML = ''; }, 260);
@@ -174,6 +180,8 @@ function openShowreel() {
   `;
   overlay.setAttribute('aria-hidden', 'false');
   overlay.classList.add('open');
+  lastFocus = document.activeElement;
+  document.getElementById('modalClose').focus();
   document.body.style.overflow = 'hidden';
 }
 
@@ -247,6 +255,8 @@ function openPhotoLightbox(index) {
   _lbIndex = index;
   _updateLightboxPhoto(index);
   document.getElementById('photoLightbox').classList.add('open');
+  lastFocus = document.activeElement;
+  document.getElementById('photoLightboxClose').focus();
   document.body.style.overflow = 'hidden';
 }
 
@@ -263,6 +273,7 @@ function _updateLightboxPhoto(index) {
 
 function closePhotoLightbox() {
   document.getElementById('photoLightbox').classList.remove('open');
+  if (lastFocus) lastFocus.focus();
   document.body.style.overflow = '';
 }
 

@@ -196,9 +196,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   position: fixed; inset: 0; z-index: 200;
   background: rgba(20,16,13,.92);
   display: flex; align-items: center; justify-content: center; padding: 24px;
-  opacity: 0; pointer-events: none; transition: opacity var(--ease);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--ease), visibility 0s var(--ease);
 }
-.modal-overlay.open { opacity: 1; pointer-events: all; }
+.modal-overlay.open { opacity: 1; visibility: visible; pointer-events: all; transition: opacity var(--ease); }
 .modal {
   position: relative; width: 100%; max-width: 900px; max-height: 90dvh; overflow-y: auto;
   background: var(--surface);
@@ -237,9 +237,9 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
 .photo-lightbox {
   position: fixed; inset: 0; z-index: 300; background: rgba(20,16,13,.96);
   display: flex; align-items: center; justify-content: center;
-  opacity: 0; pointer-events: none; transition: opacity var(--ease);
+  opacity: 0; visibility: hidden; pointer-events: none; transition: opacity var(--ease), visibility 0s var(--ease);
 }
-.photo-lightbox.open { opacity: 1; pointer-events: all; }
+.photo-lightbox.open { opacity: 1; visibility: visible; pointer-events: all; transition: opacity var(--ease); }
 .photo-lightbox-inner { max-width: 90vw; max-height: 88vh; display: flex; flex-direction: column; align-items: center; }
 .photo-lightbox-img { max-width: 90vw; max-height: 82vh; object-fit: contain; user-select: none; }
 .photo-lightbox-caption { margin-top: 12px; font-size: 15px; color: var(--muted); }
