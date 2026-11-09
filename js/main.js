@@ -1,201 +1,82 @@
 /* ═══════════════════════════════════════
-   BUILD A CARD element from a project object
+   HERO REEL — skip it for reduced motion
 ═══════════════════════════════════════ */
-function makeCard(project, index, isFeatured) {
+function initHeroReel() {
+  const iframe = document.getElementById('heroVimeo');
+  if (!iframe) return;
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) iframe.remove();
+  else iframe.src = iframe.dataset.src;
+}
+
+
+/* Click + Enter/Space opens the project modal */
+function makeOpenable(el, index) {
+  el.tabIndex = 0;
+  el.setAttribute('role', 'button');
+  el.addEventListener('click', () => openModal(index));
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); openModal(index); }
+  });
+}
+
+
+/* ═══════════════════════════════════════
+   HIGHLIGHTS — featured:true projects
+═══════════════════════════════════════ */
+function makeCard(project, index) {
   const card = document.createElement('article');
-  card.className = 'project-card' + (isFeatured ? ' featured-card' : '');
+  card.className = 'project-card';
   card.dataset.index = index;
-  card.dataset.tags  = (project.tags || []).join(',');
-
-  const studioYear = [project.studio, project.year].filter(Boolean).join(' · ');
-
-  const hasVideo = project.youtube || project.vimeo;
-  const playIcon = hasVideo
-    ? `<span class="overlay-play">
-         <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
-       </span>`
-    : '';
-
   card.innerHTML = `
-    <div class="card-inner">
-      <div class="card-media">
-        <img src="${project.poster}" alt="${project.title}" loading="lazy" />
-        <div class="card-overlay">
-          <div class="card-overlay-inner">
-            ${playIcon}
-            <span class="overlay-cta">View Project</span>
-          </div>
-        </div>
-      </div>
-      <div class="card-footer">
-        <div>
-          <h3 class="card-title-text">${project.title}</h3>
-          <p class="card-meta-text">${studioYear}</p>
-        </div>
-        <span class="card-type-badge">${project.type}</span>
-      </div>
-    </div>`;
-
-  card.addEventListener('click', () => openModal(index));
+    <div class="poster"><img src="${project.poster}" alt="" loading="lazy" onerror="this.remove()" /></div>
+    <p>${project.title}</p>
+    <small>${[project.studio, project.year].filter(Boolean).join(', ')}</small>`;
+  makeOpenable(card, index);
   return card;
 }
 
-
-/* ═══════════════════════════════════════
-   RENDER — split featured vs filmography
-═══════════════════════════════════════ */
 function renderProjects() {
-  const featuredGrid = document.getElementById('featuredGrid');
-  const allGrid      = document.getElementById('allGrid');
-
-  PROJECTS.forEach((project, index) => {
-    const card = makeCard(project, index, !!project.featured);
-    if (project.featured) {
-      featuredGrid.appendChild(card);
-    } else {
-      allGrid.appendChild(card);
-    }
-  });
-
-  // fade-in on scroll
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach((entry, i) => {
-      if (entry.isIntersecting) {
-        setTimeout(() => entry.target.classList.add('visible'), i * 60);
-        observer.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('.project-card').forEach(c => observer.observe(c));
+  const grid = document.getElementById('featuredGrid');
+  PROJECTS.forEach((p, i) => { if (p.featured) grid.appendChild(makeCard(p, i)); });
 }
 
 
 /* ═══════════════════════════════════════
-   FILTER BAR & SEARCH
+   CREDITS TABLE — every project
+═══════════════════════════════════════ */
+function renderCredits() {
+  const body = document.getElementById('creditsTable');
+  PROJECTS.forEach((p, i) => {
+    const row = document.createElement('tr');
+    row.className = 'credit-row';
+    row.dataset.index = i;
+    row.innerHTML = `<td>${p.year || ''}</td><td>${p.title}</td><td>${p.studio || ''}</td><td class="col-role">${p.role || ''}</td>`;
+    makeOpenable(row, i);
+    body.appendChild(row);
+  });
+  document.getElementById('creditCount').textContent = `${PROJECTS.length} credits`;
+}
+
+
+/* ═══════════════════════════════════════
+   FILTERS
 ═══════════════════════════════════════ */
 function applyFilters() {
-  const searchInput = document.getElementById('projectSearch');
-  const query = searchInput ? searchInput.value.toLowerCase().trim() : '';
-  
-  const activeBtn = document.querySelector('#filterBar .filter-btn.active');
-  const filter = activeBtn ? activeBtn.dataset.filter : 'all';
-  const isAll = filter === 'all';
-  
-  // Toggle clear button
-  const clearBtn = document.getElementById('clearSearchBtn');
-  if (clearBtn) {
-    clearBtn.style.display = query.length > 0 ? 'flex' : 'none';
-  }
-  
-  let visibleFeaturedCount = 0;
-  let visibleAllCount = 0;
-  
-  document.querySelectorAll('.project-card').forEach(card => {
-    const idx = parseInt(card.dataset.index, 10);
-    const project = PROJECTS[idx];
-    if (!project) return;
-    
-    // Category match
-    const tags = project.tags || [];
-    const matchCategory = isAll || tags.includes(filter);
-    
-    // Search query match
-    let matchSearch = true;
-    if (query.length > 0) {
-      const title = (project.title || '').toLowerCase();
-      const role = (project.role || '').toLowerCase();
-      const studio = (project.studio || '').toLowerCase();
-      const tools = (project.tools || '').toLowerCase();
-      const description = (project.description || '').toLowerCase();
-      const year = (project.year || '').toLowerCase();
-      const projectTags = tags.map(t => t.toLowerCase());
-      
-      matchSearch = title.includes(query) ||
-                    role.includes(query) ||
-                    studio.includes(query) ||
-                    tools.includes(query) ||
-                    description.includes(query) ||
-                    year.includes(query) ||
-                    projectTags.some(t => t.includes(query));
-    }
-    
-    const show = matchCategory && matchSearch;
-    card.classList.toggle('hidden', !show);
-    
-    if (show) {
-      if (project.featured) {
-        visibleFeaturedCount++;
-      } else {
-        visibleAllCount++;
-      }
-    }
-  });
-  
-  // Hide empty sections
-  const featuredLabel = document.getElementById('featuredLabel');
-  const featuredGrid = document.getElementById('featuredGrid');
-  if (featuredLabel && featuredGrid) {
-    const showFeatured = visibleFeaturedCount > 0;
-    featuredLabel.style.display = showFeatured ? '' : 'none';
-    featuredGrid.style.display = showFeatured ? '' : 'none';
-  }
-  
-  const filmographyHeader = document.getElementById('filmographyHeader');
-  const allProjectsWrapper = document.getElementById('allProjectsWrapper');
-  if (filmographyHeader && allProjectsWrapper) {
-    const showAll = visibleAllCount > 0;
-    filmographyHeader.style.display = showAll ? '' : 'none';
-    allProjectsWrapper.style.display = showAll ? '' : 'none';
-  }
-  
-  // Auto-expand/collapse credits list based on filtering
-  if (!isAll || query.length > 0) {
-    expandFilmography();
-  } else {
-    collapseFilmography();
-  }
-}
+  const active = document.querySelector('#filterBar .filter-btn.active');
+  const filter = active ? active.dataset.filter : 'all';
+  const counts = { featuredGrid: 0, creditsBlock: 0 };
 
-function initSkillTags() {
-  document.querySelectorAll('.skill-tag').forEach(tag => {
-    tag.addEventListener('click', () => {
-      const tagText = tag.textContent.trim();
-      const searchInput = document.getElementById('projectSearch');
-      const bar = document.getElementById('filterBar');
-      if (!bar) return;
-      
-      const matchedFilterBtn = Array.from(bar.querySelectorAll('.filter-btn')).find(
-        btn => btn.dataset.filter.toLowerCase() === tagText.toLowerCase()
-      );
-      
-      if (matchedFilterBtn) {
-        if (searchInput) searchInput.value = '';
-        matchedFilterBtn.click();
-      } else {
-        const allBtn = Array.from(bar.querySelectorAll('.filter-btn')).find(b => b.dataset.filter === 'all');
-        if (allBtn) {
-          bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-          allBtn.classList.add('active');
-        }
-        if (searchInput) {
-          searchInput.value = tagText;
-        }
-        applyFilters();
-      }
-      
-      const projectsSection = document.getElementById('projects');
-      if (projectsSection) {
-        projectsSection.scrollIntoView({ behavior: 'smooth' });
-      }
-    });
+  document.querySelectorAll('.project-card, .credit-row').forEach(el => {
+    const show = filter === 'all' || (PROJECTS[el.dataset.index].tags || []).includes(filter);
+    el.classList.toggle('hidden', !show);
+    if (show) counts[el.classList.contains('project-card') ? 'featuredGrid' : 'creditsBlock']++;
   });
+
+  for (const id in counts) document.getElementById(id).classList.toggle('hidden', counts[id] === 0);
 }
 
 function initFilters() {
   const bar = document.getElementById('filterBar');
-  if (!bar) return;
-
   FILTERS.forEach(f => {
     const btn = document.createElement('button');
     btn.className      = 'filter-btn' + (f.value === 'all' ? ' active' : '');
@@ -207,70 +88,12 @@ function initFilters() {
   bar.addEventListener('click', e => {
     const btn = e.target.closest('.filter-btn');
     if (!btn) return;
-
-    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-
+    bar.querySelectorAll('.filter-btn').forEach(b => b.classList.toggle('active', b === btn));
     applyFilters();
   });
-  
-  const searchInput = document.getElementById('projectSearch');
-  const clearBtn = document.getElementById('clearSearchBtn');
-  
-  if (searchInput) {
-    searchInput.addEventListener('input', applyFilters);
-  }
-  
-  if (clearBtn && searchInput) {
-    clearBtn.addEventListener('click', () => {
-      searchInput.value = '';
-      applyFilters();
-      searchInput.focus();
-    });
-  }
-  
-  initSkillTags();
 }
 
 
-/* ═══════════════════════════════════════
-   FILMOGRAPHY VEIL (show / collapse)
-═══════════════════════════════════════ */
-function expandFilmography() {
-  const wrapper = document.getElementById('allProjectsWrapper');
-  if (wrapper.classList.contains('expanded')) return;
-
-  wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
-  wrapper.classList.remove('collapsed');
-  wrapper.classList.add('expanded');
-
-  wrapper.addEventListener('transitionend', () => {
-    if (wrapper.classList.contains('expanded')) wrapper.style.maxHeight = 'none';
-  }, { once: true });
-}
-
-function collapseFilmography() {
-  const wrapper = document.getElementById('allProjectsWrapper');
-  if (!wrapper.classList.contains('expanded')) return;
-
-  // force a pixel height before transitioning back to 520px
-  wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
-  requestAnimationFrame(() => {
-    requestAnimationFrame(() => {
-      wrapper.style.maxHeight = '520px';
-      wrapper.classList.remove('expanded');
-      wrapper.classList.add('collapsed');
-    });
-  });
-}
-
-function initVeil() {
-  document.getElementById('showAllBtn').addEventListener('click', expandFilmography);
-  document.getElementById('collapseBtn').addEventListener('click', () => {
-    collapseFilmography();
-    document.getElementById('projects').scrollIntoView({ behavior: 'smooth' });
-  });
-}
 
 
 /* ═══════════════════════════════════════
@@ -303,7 +126,7 @@ function openModal(index) {
     modal.classList.remove('modal--poster');
     modalMedia.innerHTML = `
       <iframe
-        src="https://player.vimeo.com/video/${p.vimeo}?autoplay=1&color=ff5c2b&title=0&byline=0&portrait=0&dnt=1"
+        src="https://player.vimeo.com/video/${p.vimeo}?autoplay=1&color=e9c58a&title=0&byline=0&portrait=0&dnt=1"
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen>
       </iframe>`;
@@ -341,13 +164,12 @@ function openShowreel() {
   modal.classList.remove('modal--poster');
   modalMedia.innerHTML = `
     <iframe
-      src="https://player.vimeo.com/video/902276602?autoplay=1&color=ff5c2b&title=0&byline=0&portrait=0&dnt=1"
+      src="https://player.vimeo.com/video/902276602?autoplay=1&color=e9c58a&title=0&byline=0&portrait=0&dnt=1"
       allow="autoplay; fullscreen; picture-in-picture"
       allowfullscreen>
     </iframe>`;
   modalBody.innerHTML = `
-    <div class="modal-tags"><span class="modal-tag modal-tag-type">Showreel</span></div>
-    <h2 class="modal-title" id="modalTitle">Alexander Jarosch — VFX Showreel</h2>
+    <h2 class="modal-title" id="modalTitle">Showreel</h2>
     <p class="modal-role">Lead FX Technical Director &nbsp;·&nbsp; Lead VFX Artist</p>
   `;
   overlay.setAttribute('aria-hidden', 'false');
@@ -470,31 +292,15 @@ function initPhotoLightbox() {
 
 
 /* ═══════════════════════════════════════
-   PHOTO VEIL (expand / collapse)
+   PHOTOS — "Show all" expands the grid
 ═══════════════════════════════════════ */
 function initPhotoVeil() {
   const wrapper = document.getElementById('photoWrapper');
-  if (!wrapper) return;
-
-  document.getElementById('showAllPhotosBtn').addEventListener('click', () => {
-    wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
+  const btn = document.getElementById('showAllPhotosBtn');
+  if (!wrapper || !btn) return;
+  btn.addEventListener('click', () => {
     wrapper.classList.remove('collapsed');
-    wrapper.classList.add('expanded');
-    wrapper.addEventListener('transitionend', () => {
-      if (wrapper.classList.contains('expanded')) wrapper.style.maxHeight = 'none';
-    }, { once: true });
-  });
-
-  document.getElementById('collapsePhotosBtn').addEventListener('click', () => {
-    wrapper.style.maxHeight = wrapper.scrollHeight + 'px';
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        wrapper.style.maxHeight = '480px';
-        wrapper.classList.remove('expanded');
-        wrapper.classList.add('collapsed');
-      });
-    });
-    document.getElementById('photography').scrollIntoView({ behavior: 'smooth' });
+    btn.remove();
   });
 }
 
@@ -538,9 +344,10 @@ function initContactForm() {
 /* ═══════════════════════════════════════
    INIT
 ═══════════════════════════════════════ */
+initHeroReel();
 renderProjects();
+renderCredits();
 initFilters();
-initVeil();
 initModal();
 initNav();
 renderPhotos();
