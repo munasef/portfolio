@@ -61,7 +61,7 @@ const PROJECTS = [
     type:        "Games · Cinematics",
     year:        "In production",
     role:        "Lead VFX Artist (Cinematics)",
-    studio:      "",
+    studio:      "Eidos-Montréal",
     tools:       "Houdini · Unreal Engine 5 · Niagara",
     featured:    true,
     nda:         true,
