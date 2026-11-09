@@ -76,6 +76,33 @@ function applyFilters() {
   });
 
   for (const id in counts) document.getElementById(id).classList.toggle('hidden', counts[id] === 0);
+  clipCredits();
+}
+
+
+/* Credits list: first CREDITS_PREVIEW visible rows, rest behind a toggle */
+const CREDITS_PREVIEW = 10;
+let creditsExpanded = false;
+
+function clipCredits() {
+  let n = 0;
+  document.querySelectorAll('.credit-row').forEach(row => {
+    const visible = !row.classList.contains('hidden');
+    if (visible) n++;
+    row.classList.toggle('clipped', visible && !creditsExpanded && n > CREDITS_PREVIEW);
+  });
+  const btn = document.getElementById('creditsToggle');
+  btn.classList.toggle('hidden', n <= CREDITS_PREVIEW);
+  btn.textContent = creditsExpanded ? 'Show fewer' : `Show all ${n} credits`;
+}
+
+function initCreditsToggle() {
+  document.getElementById('creditsToggle').addEventListener('click', () => {
+    creditsExpanded = !creditsExpanded;
+    clipCredits();
+    if (!creditsExpanded) document.getElementById('creditsBlock').scrollIntoView({ block: 'start' });
+  });
+  clipCredits();
 }
 
 function initFilters() {
@@ -359,6 +386,7 @@ initHeroReel();
 renderProjects();
 renderCredits();
 initFilters();
+initCreditsToggle();
 initModal();
 initNav();
 renderPhotos();
