@@ -20,6 +20,9 @@
  *  poster       Image path          e.g. "assets/posters/dune-part-one.jpg"
  *               Recommended: 1280 × 720 px (16:9)
  *               Best source: themoviedb.org → Images → Backdrops
+ *  featured     true → shown in the Highlights row (keep it to 6)
+ *  nda          true → Highlights card shows an "Under NDA" placeholder
+ *               instead of a poster (leave poster "")
  *
  * ═══════════════════════════════════════════════════════════
  *  FILTERS — shown as pill buttons above the project list.
@@ -60,6 +63,8 @@ const PROJECTS = [
     role:        "Lead VFX Artist (Cinematics)",
     studio:      "",
     tools:       "Houdini · Unreal Engine 5 · Niagara",
+    featured:    true,
+    nda:         true,
     tags:        ["Games", "Destruction", "Niagara"],
     description: "Leading cinematic VFX on an unannounced AAA title. Heavy use of Houdini RBD destruction baked to vertex animation textures, Niagara Data Channels, and a weather effects system. Working across cinematic and gameplay VFX alongside an external partner studio.",
     vimeo:       "",
@@ -120,6 +125,7 @@ const PROJECTS = [
     studio:      "Weta FX",
     tools:       "Houdini · Nuke · Maya",
     awards:      ["VES Award — Outstanding Visual Effects in a Photoreal Feature"],
+    featured:    true,
     tags:        ["Film", "Fluids"],
     description: "Senior FX TD at Weta FX on Wes Ball's continuation of the franchise. Closeup fluid simulations using Weta's proprietary toolset and Houdini.",
     vimeo:       "",

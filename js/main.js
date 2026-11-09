@@ -31,7 +31,9 @@ function makeCard(project, index) {
   card.className = 'project-card';
   card.dataset.index = index;
   card.innerHTML = `
-    <div class="poster"><img src="${project.poster}" alt="" loading="lazy" onerror="this.remove()" /></div>
+    ${project.nda
+      ? `<div class="poster poster--nda"><span>${project.type || ''}</span><b>Under<br>NDA</b></div>`
+      : `<div class="poster"><img src="${project.poster}" alt="" loading="lazy" onerror="this.remove()" /></div>`}
     <p>${project.title}</p>
     <small>${[project.studio, project.year].filter(Boolean).join(', ')}</small>`;
   makeOpenable(card, index);
