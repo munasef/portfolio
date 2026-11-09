@@ -45,17 +45,28 @@ function renderProjects() {
 
 
 /* ═══════════════════════════════════════
-   CREDITS TABLE — every project
+   CREDITS TABLE — every project, games first
 ═══════════════════════════════════════ */
+const CREDIT_GROUPS = [
+  { label: 'Games',     match: p => (p.tags || []).includes('Games') },
+  { label: 'Film & TV', match: p => !(p.tags || []).includes('Games') },
+];
+
 function renderCredits() {
-  const body = document.getElementById('creditsTable');
-  PROJECTS.forEach((p, i) => {
-    const row = document.createElement('tr');
-    row.className = 'credit-row';
-    row.dataset.index = i;
-    row.innerHTML = `<td>${p.year || ''}</td><td>${p.title}</td><td>${p.studio || ''}</td><td class="col-role">${p.role || ''}</td>`;
-    makeOpenable(row, i);
-    body.appendChild(row);
+  const table = document.getElementById('creditsTable');
+  CREDIT_GROUPS.forEach(group => {
+    const body = document.createElement('tbody');
+    body.innerHTML = `<tr><th class="credit-group" colspan="4" scope="colgroup">${group.label}</th></tr>`;
+    PROJECTS.forEach((p, i) => {
+      if (!group.match(p)) return;
+      const row = document.createElement('tr');
+      row.className = 'credit-row';
+      row.dataset.index = i;
+      row.innerHTML = `<td>${p.year || ''}</td><td>${p.title}</td><td>${p.studio || ''}</td><td class="col-role">${p.role || ''}</td>`;
+      makeOpenable(row, i);
+      body.appendChild(row);
+    });
+    table.appendChild(body);
   });
   document.getElementById('creditCount').textContent = `${PROJECTS.length} credits`;
 }
@@ -90,6 +101,11 @@ function clipCredits() {
     const visible = !row.classList.contains('hidden');
     if (visible) n++;
     row.classList.toggle('clipped', visible && !creditsExpanded && n > CREDITS_PREVIEW);
+  });
+  // A group heading shows only while its group has a row on screen
+  document.querySelectorAll('.credit-group').forEach(th => {
+    const rows = th.closest('tbody').querySelectorAll('.credit-row:not(.hidden):not(.clipped)');
+    th.parentElement.classList.toggle('hidden', rows.length === 0);
   });
   const btn = document.getElementById('creditsToggle');
   btn.classList.toggle('hidden', n <= CREDITS_PREVIEW);
@@ -203,7 +219,7 @@ function openShowreel() {
     </iframe>`;
   modalBody.innerHTML = `
     <h2 class="modal-title" id="modalTitle">Showreel</h2>
-    <p class="modal-role">Lead FX Technical Director &nbsp;·&nbsp; Lead VFX Artist</p>
+    <p class="modal-role">Lead VFX Artist</p>
   `;
   overlay.setAttribute('aria-hidden', 'false');
   overlay.classList.add('open');

@@ -138,6 +138,8 @@ button { font: inherit; color: inherit; background: none; border: 0; cursor: poi
   padding: 0 12px 10px 0; border-bottom: 1px solid var(--hair);
 }
 .credits td { padding: 12px 12px 12px 0; border-bottom: 1px solid var(--hair); vertical-align: top; }
+.credits th.credit-group { color: var(--text); font-size: 15px; font-weight: 700; padding-top: 28px; }
+.credits tbody:first-of-type th.credit-group { padding-top: 16px; }
 .credit-row { cursor: pointer; transition: background var(--ease); }
 .credit-row:hover { background: var(--surface); }
 .credit-row td:first-child, .credit-row td:nth-child(3), .credit-row .col-role { color: var(--muted); }
