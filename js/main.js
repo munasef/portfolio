@@ -176,9 +176,13 @@ function openModal(index) {
         allow="autoplay; fullscreen; picture-in-picture"
         allowfullscreen>
       </iframe>`;
-  } else {
+  } else if (p.poster) {
     modal.classList.add('modal--poster');
     modalMedia.innerHTML = `<img src="${p.poster}" alt="${p.title}" />`;
+  } else {
+    // No media (e.g. unannounced titles): text-only modal
+    modal.classList.remove('modal--poster');
+    modalMedia.innerHTML = '';
   }
 
   modalBody.innerHTML = `

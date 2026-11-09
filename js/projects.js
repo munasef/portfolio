@@ -54,6 +54,20 @@ const PROJECTS = [
   // ── Games ────────────────────────────────────────────────
 
   {
+    title:       "Unannounced AAA",
+    type:        "Games · Cinematics",
+    year:        "In production",
+    role:        "Lead VFX Artist (Cinematics)",
+    studio:      "",
+    tools:       "Houdini · Unreal Engine 5 · Niagara",
+    tags:        ["Games", "Destruction", "Niagara"],
+    description: "Leading cinematic VFX on an unannounced AAA title. Heavy use of Houdini RBD destruction baked to vertex animation textures, Niagara Data Channels, and a weather effects system. Working across cinematic and gameplay VFX alongside an external partner studio.",
+    vimeo:       "",
+    youtube:     "",
+    poster:      "",
+  },
+
+  {
     title:       "Tomb Raider: Atlantis",
     type:        "Games · Cinematics",
     year:        "2025",
